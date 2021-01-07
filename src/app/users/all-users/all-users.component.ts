@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { NavigationExtras, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
@@ -16,7 +17,7 @@ export class AllUsersComponent implements OnInit {
   users:Array<User>;
   totalUsers:number;
   pageNumber:number;
-  constructor(private toastr: ToastrService, public userService: UserService) {
+  constructor(private toastr: ToastrService, public userService: UserService , public router: Router) {
     this.users = [];
     this.totalUsers = 0;
     this.pageNumber = 1;
@@ -34,9 +35,9 @@ export class AllUsersComponent implements OnInit {
       this.totalUsers = res.total || 0;
       console.log(res);
     }, err => {
-      if(err.statusText == "Unknown Error"){
+      //if(err.statusText == "Unknown Error"){
         this.toastr.error('Something went wrong, please try again later');
-      }
+     // }
       console.log(err);
     })
   }
@@ -48,6 +49,11 @@ export class AllUsersComponent implements OnInit {
 
   goToDetails(id:number){
 
-    console.log('go to details',id);
+    let navigationExtras:NavigationExtras ={
+      state:{
+        userId:id
+      }
+    }
+    this.router.navigate(['create-user'],navigationExtras);
   }
 }

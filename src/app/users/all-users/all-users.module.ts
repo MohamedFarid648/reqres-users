@@ -6,6 +6,7 @@ import { AllUsersComponent } from './all-users.component';
 import { UserService } from 'src/app/services/user.service';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     CommonModule,
     AllUsersRoutingModule,
     MatGridListModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonModule
   ],
   exports: [AllUsersComponent],
   providers:[UserService]

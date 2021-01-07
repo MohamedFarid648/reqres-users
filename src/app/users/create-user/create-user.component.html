@@ -1,23 +1,48 @@
+<mat-grid-list cols="1" rowHeight="250" *ngIf="isExist">
+    <mat-grid-tile>
+        <div>
+            <div>
+                <h2>{{user.first_name}} {{user.last_name}}</h2>
+            </div>
+            <div>
+                <h4>{{user.email}}</h4>
+            </div>
+            <div>
+                <img src="http://www.freeimageslive.com/galleries/nature/water/preview/breaking_wave.jpg"
+                    alt="{{user.first_name}} {{user.last_name}}">
+            </div>
+            <div class="col-12 deletedCol">
+                <button mat-button color="warn" (click)="deleteUser(user.id || 0)">Delete</button>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
 
-  <mat-grid-list cols="2" rowHeight="100px">
+<mat-grid-list cols="2" rowHeight="100px">
     <form [formGroup]="userForm">
-    <mat-grid-tile class="emailTile">
-        <mat-form-field appearance="fill">
-            <mat-label>Enter User Email</mat-label>
-            <input type="email" [(ngModel)]="user.email" matInput placeholder="example@example.com" formControlName="email" required>
-            <mat-error *ngIf="isSubmitted && userForm?.get('email')?.invalid">{{getErrorMessageForEmail()}}</mat-error>
-          </mat-form-field>
-    </mat-grid-tile>
+        <mat-grid-tile class="emailTile">
+            <mat-form-field appearance="fill">
+                <mat-label>Enter User Email</mat-label>
+                <input type="email" [(ngModel)]="user.email" matInput placeholder="example@example.com"
+                    formControlName="email" required>
+                <mat-error *ngIf="isSubmitted && userForm?.get('email')?.invalid">{{getErrorMessageForEmail()}}
+                </mat-error>
+            </mat-form-field>
+        </mat-grid-tile>
 
-    <mat-grid-tile class="jobTile">
-          <mat-form-field appearance="fill">
-            <mat-label>Enter User Job</mat-label>
-            <input type="text" [(ngModel)]="user.job" matInput placeholder="developer" formControlName="job"   required>
-            <mat-error *ngIf="isSubmitted && userForm?.get('email')?.invalid">{{getErrorMessageForJob()}}</mat-error>
-          </mat-form-field>
-    </mat-grid-tile>
-    <mat-grid-tile class="buttonTile" colspan= "2">
-          <button mat-raised-button color="primary" (click)="createUser()">Create User</button>
-    </mat-grid-tile>
+        <mat-grid-tile class="jobTile">
+            <mat-form-field appearance="fill">
+                <mat-label>Enter User Job</mat-label>
+                <input type="text" [(ngModel)]="user.job" matInput placeholder="developer" formControlName="job"
+                    required>
+                <mat-error *ngIf="isSubmitted && userForm?.get('job')?.invalid">{{getErrorMessageForJob()}}
+                </mat-error>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="buttonTile" colspan="2">
+            <button mat-raised-button color="primary" (click)="createUser()">
+                <span *ngIf="!isExist">Create</span><span *ngIf="isExist">Update</span> <span> User</span>
+            </button>
+        </mat-grid-tile>
     </form>
 </mat-grid-list>

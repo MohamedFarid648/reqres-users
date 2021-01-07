@@ -50,10 +50,10 @@ export class UserService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUsers(pageNumber:number,observe?: 'body', reportProgress?: boolean): Observable<GetUsersResponse>;
-    public getUsers(pageNumber:number,observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GetUsersResponse>>;
-    public getUsers(pageNumber:number,observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GetUsersResponse>>;
-    public getUsers(pageNumber:number,observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getUsers(pageNumber: number, observe?: 'body', reportProgress?: boolean): Observable<GetUsersResponse>;
+    public getUsers(pageNumber: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<GetUsersResponse>>;
+    public getUsers(pageNumber: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<GetUsersResponse>>;
+    public getUsers(pageNumber: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -81,13 +81,11 @@ export class UserService {
     }
 
 
-  
 
 
+    public addUser(user: User, observe?: 'body', reportProgress?: boolean): Observable<any>;
     public addUser(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-
     public addUser(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-
     public addUser(user: User, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         if (user === null || user === undefined) {
@@ -125,7 +123,51 @@ export class UserService {
         );
     }
 
-    
+
+
+    public editUser(user: User, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public editUser(user: User, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public editUser(user: User, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public editUser(user: User, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+
+        if (user === null || user === undefined) {
+            throw new Error('Required parameter user was null or undefined when calling addSpecialist.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.patch<any>(`${this.basePath}/users`,
+            user,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    public deleteUser(id: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteUser(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteUser(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
     public deleteUser(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -155,5 +197,36 @@ export class UserService {
         );
     }
 
+    public getUser(id: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public getUser(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public getUser(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public getUser(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling specialistIdDelete.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [];
+
+        return this.httpClient.get<any>(`${this.basePath}/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                reportProgress: reportProgress
+            }
+        );
+    }
 }
 

@@ -11,10 +11,6 @@ const routes: Routes = [
     path: 'create-user',
     loadChildren: () => import('./users/create-user/create-user.module')
       .then(m => m.CreateUserModule),
-  }, {
-    path: 'edit-user',
-    loadChildren: () => import('./users/edit-user/edit-user.module')
-      .then(m => m.EditUserModule),
   },
   {
     path: '',
