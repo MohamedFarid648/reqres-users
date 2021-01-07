@@ -1,1 +1,21 @@
-<p>create-user works!</p>
+
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <form [formGroup]="userForm">
+    <mat-grid-tile class="text-center" colspan= "2">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter User Email</mat-label>
+            <input type="email" [(ngModel)]="user.email" matInput placeholder="example@example.com" formControlName="email" required>
+            <mat-error *ngIf="isSubmitted && userForm?.get('email')?.invalid">{{getErrorMessageForEmail()}}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Enter User Job</mat-label>
+            <input type="text" [(ngModel)]="user.job" matInput placeholder="developer" formControlName="job"   required>
+            <mat-error *ngIf="isSubmitted && userForm?.get('email')?.invalid">{{getErrorMessageForJob()}}</mat-error>
+          </mat-form-field>
+          
+          <button mat-raised-button color="primary" (click)="createUser()">Create User</button>
+
+    </mat-grid-tile>
+    </form>
+</mat-grid-list>

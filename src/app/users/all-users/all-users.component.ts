@@ -46,7 +46,8 @@ export class AllUsersComponent implements OnInit {
     this.getData(event.pageIndex + 1)
   }
 
-  goToDetails(){
-    console.log('go to details');
+  goToDetails(id:number){
+
+    console.log('go to details',id);
   }
 }
