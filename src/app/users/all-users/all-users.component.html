@@ -1,1 +1,31 @@
-<mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+<mat-grid-list cols="4" rowHeight="250px" *ngIf="users.length > 0">
+    <mat-grid-tile *ngFor="let user of users">
+        <a (click)="goToDetails()">
+            <div class="row">
+                <div class="col-12">
+                    <h2>{{user.first_name}} {{user.last_name}}</h2>
+                </div>
+                <div class="col-12">
+                    <h4>{{user.email}}</h4>
+                </div>
+                <div class="col-12">
+                    <img [src]="user.avatar" alt="">
+                </div>
+            </div>
+        </a>
+    </mat-grid-tile>
+</mat-grid-list>
+
+
+<mat-paginator *ngIf="users.length > 0" [length]="totalUsers" [pageSize]="6" (page)="getOtherUserData($event)">
+</mat-paginator>
+
+<mat-grid-list cols="1" rowHeight="1:1" *ngIf="users.length == 0">
+    <mat-grid-tile>
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2>No Users till now</h2>
+            </div>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
