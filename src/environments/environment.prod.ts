@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverLink:'https://reqres.in/api',
+  serverLink:'https://reqres.in/api/users',
 };
