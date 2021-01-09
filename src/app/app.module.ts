@@ -34,7 +34,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     ToastrModule.forRoot(),
     FlexLayoutModule,
     HttpClientModule,
-    AppRoutingModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
