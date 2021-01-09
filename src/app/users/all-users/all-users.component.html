@@ -22,10 +22,10 @@
 <mat-paginator *ngIf="users.length > 0" [length]="totalUsers" [pageSize]="6" (page)="getOtherUserData($event)">
 </mat-paginator>
 
-<mat-grid-list cols="1" rowHeight="1:1" *ngIf="users.length == 0">
+<mat-grid-list cols="1" rowHeight="100px" (window:resize)="onResize($event)" *ngIf="users.length == 0">
     <mat-grid-tile>
-        <div class="row">
-            <div class="col-12 text-center">
+        <div>
+            <div>
                 <h2>No Users till now</h2>
             </div>
         </div>

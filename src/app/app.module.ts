@@ -25,7 +25,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
-    MyLoaderComponent
+    // MyLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -42,9 +42,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule
+    // MatProgressSpinnerModule,
+    // MatProgressBarModule
 
   ],
   providers: [

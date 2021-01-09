@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { SpinnerService } from './services/spinner.service';
 
@@ -14,7 +13,6 @@ export class AppComponent {
 
   showSpinner: boolean = false;
  
-  constructor(public spinnerService: SpinnerService,
-    private httpClient: HttpClient) { }
+  constructor(public spinnerService: SpinnerService) { }
 
 }
