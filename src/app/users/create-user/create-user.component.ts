@@ -13,11 +13,19 @@ import { UserService } from 'src/app/services/user.service';
 export class CreateUserComponent implements OnInit {
 
   userForm: FormGroup;
-  isSubmitted: boolean = false;
-  isExist: boolean = false;
+  isSubmitted: boolean;
+  isExist: boolean;
+  user: User;
+  breakpoint: number;
 
-  user: User = new User();
+
   constructor(private formBuilder: FormBuilder, private toastr: ToastrService, public userService: UserService, public router: Router) {
+
+    this.isSubmitted = false;
+    this.isExist = false;
+    this.user = new User();
+    this.breakpoint = 2;
+
 
     if (this.router.getCurrentNavigation()?.extras && this.router.getCurrentNavigation()?.extras.state) {
 
@@ -37,6 +45,12 @@ export class CreateUserComponent implements OnInit {
     if (this.isExist) {
       this.getData(this.user.id || 0);
     }
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 1;
+  }
+
+  onResize(event: any) {
+    console.log(event);
+    this.breakpoint = (window.innerWidth <= 400) ? 1 : 1;
   }
 
   getData(id: number) {
@@ -48,6 +62,7 @@ export class CreateUserComponent implements OnInit {
       console.log(err);
     })
   }
+
   getErrorMessageForEmail() {
     if (this.userForm?.controls.email.hasError('required')) {
       return 'Email Value is required';

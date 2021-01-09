@@ -18,7 +18,7 @@
     </mat-grid-tile>
 </mat-grid-list>
 
-<mat-grid-list cols="2" rowHeight="100px">
+<mat-grid-list [cols]="breakpoint"  (window:resize)="onResize($event)" rowHeight="100px">
     <form [formGroup]="userForm">
         <mat-grid-tile class="emailTile">
             <mat-form-field appearance="fill">
@@ -39,7 +39,7 @@
                 </mat-error>
             </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile class="buttonTile" colspan="2">
+        <mat-grid-tile class="buttonTile" [colspan]="breakpoint">
             <button mat-raised-button color="primary" (click)="createUser()">
                 <span *ngIf="!isExist">Create</span><span *ngIf="isExist">Update</span> <span> User</span>
             </button>
