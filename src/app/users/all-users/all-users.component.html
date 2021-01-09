@@ -1,4 +1,4 @@
-<mat-grid-list [cols]="breakpoint" rowHeight="250px" (window:resize)="onResize($event)" *ngIf="users.length > 0">
+<mat-grid-list [cols]="breakpoint" rowHeight="250px" (window:resize)="onResize($event)" *ngIf="users.length > 0"> <!--responsive="true"-->
     <mat-grid-tile *ngFor="let user of users">
         <div>
             <div>
