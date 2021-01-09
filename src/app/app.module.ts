@@ -18,6 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyLoaderComponent } from './components/my-loader/my-loader.component';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
+import { CustomHttpInterceptor } from './interceptors/http-interceptor';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -39,11 +42,15 @@ import { LoaderInterceptor } from './interceptors/loader-interceptor.service';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
+
   ],
   providers: [
     LoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
